@@ -25,3 +25,25 @@ class AuthRepository implements IAuthRepository {
     }
   }
 }
+
+class MockAuthRepository implements IAuthRepository {
+  final AuthAPI authAPI;
+
+  const MockAuthRepository({required this.authAPI});
+
+  @override
+  Future<UserModel?> loginWithEmail({required String email, required String password}) async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    return UserModel(email: email, password: password);
+  }
+
+  @override
+  Future<UserModel?> register({required String email, required String password}) {
+    try {
+      return authAPI.register(email: email, password: password);
+    } catch (e) {
+      return Future.value(null); // TODO: should return different object. Ex Either
+    }
+  }
+}

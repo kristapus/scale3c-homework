@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:scale3c_homework/resources/colors.dart';
 import 'package:scale3c_homework/shared/presentation/widgets/buttons/button.dart';
 
-class SocialButton extends StatelessWidget {
+class SocialAuthButton extends StatelessWidget {
   final void Function() onPressed;
   final Widget icon;
 
-  const SocialButton({
+  const SocialAuthButton({
     required this.onPressed,
     required this.icon,
     super.key,

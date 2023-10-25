@@ -11,5 +11,5 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
 });
 
 final authRepositoryProvider = Provider<IAuthRepository>((ref) {
-  return AuthRepository(authAPI: AuthAPIImpl(baseUrl: 'localhost:8080', headers: {'Content-Type': 'application/json'}));
+  return MockAuthRepository(authAPI: AuthAPIImpl(baseUrl: 'localhost:8080', headers: {'Content-Type': 'application/json'}));
 });
