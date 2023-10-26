@@ -12,23 +12,35 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final StateNotifierProviderRef<AuthNotifier, AuthState> ref;
   final IAuthRepository authRepository;
 
-  AuthNotifier({required this.ref, required this.authRepository}) : super(Initial()) {
-    addListener((state) {
-      print('AuthNotifier state=$state');
-    });
-  }
+  AuthNotifier({required this.ref, required this.authRepository}) : super(Initial());
 
-  // UserModel get user => (state as SuccessUserState).user;
-
-  Future<void> login({required String email, required String password}) async {
+  Future<AuthState> login({required String email, required String password}) async {
     state = Loading();
 
-    final authUser = await authRepository.loginWithEmail(email: email, password: password);
+    final result = await authRepository.loginWithEmail(email: email, password: password);
 
-    if (authUser == null) {
-      state = AuthFailed();
-    } else {
-      state = Authenticated(user: authUser);
-    }
+    state = result.match(
+      (failure) => AuthFailed(failure.message),
+      (user) => Authenticated(user: user),
+    );
+
+    return state;
+  }
+
+  Future<AuthState> register({required String email, required String password}) async {
+    state = Loading();
+
+    final result = await authRepository.register(email: email, password: password);
+
+    state = result.match(
+      (failure) => AuthFailed(failure.message),
+      (user) => Authenticated(user: user),
+    );
+
+    return state;
+  }
+
+  void logout() {
+    state = Initial();
   }
 }

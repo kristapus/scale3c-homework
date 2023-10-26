@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:scale3c_homework/core/extensions/build_context_extension.dart';
 import 'package:scale3c_homework/features/auth/presentation/widgets/signup_form.dart';
 import 'package:scale3c_homework/features/auth/presentation/widgets/social_auth_options_row.dart';
 import 'package:scale3c_homework/resources/colors.dart';
@@ -15,7 +16,7 @@ class SignupBoard extends StatelessWidget {
       children: [
         const SignupForm(),
         const SizedBox(height: 16),
-        Text('or', style: Theme.of(context).textTheme.mBold.copyWith(color: AppColors.darkGrey)),
+        Text('or', style: Theme.of(context).textTheme.mBold.copyWith(color: context.colors.secondaryDark)),
         const SizedBox(height: 16),
         const SocialAuthOptionsRow(),
         const SizedBox(height: 50),
@@ -24,11 +25,11 @@ class SignupBoard extends StatelessWidget {
             children: [
               TextSpan(
                 text: "Already have an account? ",
-                style: Theme.of(context).textTheme.mMedium.copyWith(color: AppColors.darkGrey),
+                style: Theme.of(context).textTheme.mMedium.copyWith(color: context.colors.secondaryDark),
               ),
               TextSpan(
                 text: 'Sign In',
-                style: Theme.of(context).textTheme.mXBoldClick.copyWith(color: AppColors.peach),
+                style: Theme.of(context).textTheme.mXBoldClick.copyWith(color: context.colors.secondaryAccent),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     context.go('/login');

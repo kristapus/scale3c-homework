@@ -8,6 +8,7 @@ enum AppImages {
   emailIcon,
   facebookIcon,
   linkedinIcon,
+  menuIcon,
   phoneIcon,
   twitterIcon,
   loginImage,
@@ -26,6 +27,8 @@ extension ImagesExtension on AppImages {
         return 'assets/icons/facebook_icon.svg';
       case AppImages.linkedinIcon:
         return 'assets/icons/linkedin_icon.svg';
+      case AppImages.menuIcon:
+        return 'assets/icons/menu_icon.svg';
       case AppImages.phoneIcon:
         return 'assets/icons/phone_icon.svg';
       case AppImages.twitterIcon:

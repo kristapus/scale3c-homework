@@ -60,7 +60,6 @@ class API {
     if (useHttps) {
       return Uri.https(baseUrl, endpoint, parameters).toString();
     }
-
     return Uri.http(baseUrl, endpoint, parameters).toString();
   }
 

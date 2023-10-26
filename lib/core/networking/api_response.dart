@@ -28,7 +28,7 @@ class ApiResponse<T> {
     switch (response.statusCode) {
       case 200: // Successful
       case 201: // Successfully created
-      case 204: // Successful with no response (e.g. for DELETE)
+      case 204: // Successful with no response
         return ApiResponse._(status: Status.success, code: response.statusCode, message: null, data: response.data);
       case 400: // Request incorrect
       case 401: // User authentication failed

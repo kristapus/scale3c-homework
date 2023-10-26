@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:scale3c_homework/features/auth/presentation/pages/login_page.dart';
-import 'package:scale3c_homework/features/auth/presentation/pages/singup_page.dart';
+import 'package:scale3c_homework/core/extensions/build_context_extension.dart';
+import 'package:scale3c_homework/resources/colors.dart';
+import 'package:scale3c_homework/shared/router/router.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -14,26 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: GoRouter(
-        initialLocation: '/login',
-        routes: <RouteBase>[
-          GoRoute(
-            path: '/login',
-            builder: (context, state) {
-              return const LoginPage();
-            },
-          ),
-          GoRoute(
-            path: '/signup',
-            builder: (context, state) {
-              return const SignupPage();
-            },
-          ),
-        ],
-      ),
-      title: 'Flutter Demo',
+      routerConfig: router,
+      title: 'Scale3c homework',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Roboto',
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: context.colors.primaryColor,
+        ),
         useMaterial3: true,
       ),
     );

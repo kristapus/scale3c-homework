@@ -4,7 +4,7 @@ class Button extends StatelessWidget {
   final void Function() onPressed;
   final Widget child;
 
-  final OutlinedBorder shape;
+  final OutlinedBorder? shape;
   final double minHeight;
   final double minWidth;
   final EdgeInsets? padding;
@@ -13,7 +13,7 @@ class Button extends StatelessWidget {
   const Button({
     required this.onPressed,
     required this.child,
-    this.shape = const RoundedRectangleBorder(),
+    this.shape,
     this.minHeight = 60,
     this.minWidth = double.infinity,
     this.padding,
@@ -25,7 +25,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        shape: shape,
+        shape: shape ?? const RoundedRectangleBorder(),
         backgroundColor: backgroundColor,
         minimumSize: Size(minWidth, minHeight),
         padding: padding,
