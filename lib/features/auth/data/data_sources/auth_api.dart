@@ -40,7 +40,7 @@ class AuthAPIImpl extends API implements AuthAPI {
     required String email,
     required String password,
   }) async {
-    // TODO: this part is hardcoded purely because of testing purposes
+    // TODO: this part is hardcoded purely because of testing purposes and server is taken from another project
     final resp = await post('/api/auth/register', body: {
       'email': email,
       'password': password,

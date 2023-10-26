@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class BasePage extends StatelessWidget {
   final Widget? title;
+  final Widget? trailing;
   final Color? appBarColor;
 
   final Widget body;
@@ -9,6 +10,7 @@ class BasePage extends StatelessWidget {
 
   const BasePage({
     required this.title,
+    this.trailing,
     this.appBarColor,
     required this.body,
     this.backgroundColor,
@@ -25,6 +27,7 @@ class BasePage extends StatelessWidget {
         titleSpacing: 0,
         leadingWidth: 0,
         scrolledUnderElevation: 0,
+        actions: [trailing ?? const SizedBox()],
       ),
       backgroundColor: backgroundColor,
       body: body,

@@ -8,9 +8,11 @@ import 'package:scale3c_homework/features/auth/presentation/providers/auth_state
 import 'package:scale3c_homework/features/profile/presentation/widgets/profile_additional_information_section.dart';
 import 'package:scale3c_homework/features/profile/presentation/widgets/profile_main_information_section.dart';
 import 'package:scale3c_homework/resources/colors.dart';
+import 'package:scale3c_homework/resources/images.dart';
 import 'package:scale3c_homework/resources/text_styles.dart';
 import 'package:scale3c_homework/shared/providers/auth_providers.dart';
 import 'package:scale3c_homework/shared/widgets/base_page.dart';
+import 'package:scale3c_homework/shared/widgets/buttons/button.dart';
 import 'package:scale3c_homework/shared/widgets/buttons/text_button.dart';
 
 class ProfilePage extends ConsumerStatefulWidget {
@@ -26,6 +28,8 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   // TODO: This properety is used to store user details after state is no longer
   // Authenticated, for UI/UX purposes, so the screen remain the same.
   late UserModel _user;
+
+  static const double _horizontalPadding = 30.0;
 
   @override
   void initState() {
@@ -59,13 +63,25 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   Widget build(BuildContext context) {
     return BasePage(
       title: const SizedBox(),
+      // TODO: refeactor this button to AppBarButton in the future
+      trailing: Button(
+        minWidth: 0,
+        padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+        onPressed: () {},
+        shape: const RoundedRectangleBorder(),
+        child: AppImages.menuIcon.image(),
+      ),
       appBarColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
+              padding: const EdgeInsets.only(
+                left: _horizontalPadding,
+                right: _horizontalPadding,
+                top: 40,
+              ),
               child: ProfileMainInformationSection(
                 username: '${_user.firstName} ${_user.lastName}',
                 address: 'Address',
@@ -86,7 +102,11 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
             ),
             const SizedBox(height: 24),
             Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 40),
+              padding: const EdgeInsets.only(
+                left: _horizontalPadding,
+                right: _horizontalPadding,
+                bottom: 40,
+              ),
               child: Row(
                 children: [
                   Expanded(
@@ -95,7 +115,10 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       backgroundColor: Colors.transparent,
                       textStyle: Theme.of(context).textTheme.mBold.copyWith(color: context.colors.secondaryDark),
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: context.colors.secondaryThin),
+                        side: BorderSide(
+                          width: 1,
+                          color: context.colors.secondaryThin,
+                        ),
                       ),
                       text: 'About Me',
                     ),
