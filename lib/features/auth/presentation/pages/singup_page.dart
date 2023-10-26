@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scale3c_homework/features/auth/presentation/widgets/signup_board.dart';
 import 'package:scale3c_homework/resources/images.dart';
 import 'package:scale3c_homework/resources/text_styles.dart';
-import 'package:scale3c_homework/shared/presentation/widgets/base_page.dart';
+import 'package:scale3c_homework/shared/widgets/base_page.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});

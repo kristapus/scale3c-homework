@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scale3c_homework/shared/presentation/widgets/text_fields/text_field.dart';
+import 'package:scale3c_homework/shared/widgets/text_fields/text_field.dart';
 
 class EmailTextField extends StatelessWidget {
   final TextEditingController controller;

@@ -1,3 +1,4 @@
+import 'package:scale3c_homework/core/errors/exceptions.dart';
 import 'package:scale3c_homework/core/networking/api.dart';
 import 'package:scale3c_homework/core/networking/api_response.dart';
 import 'package:scale3c_homework/features/auth/data/models/user_model.dart';
@@ -29,7 +30,7 @@ class AuthAPIImpl extends API implements AuthAPI {
       'password': password,
     });
 
-    if (resp.status != Status.success) throw Exception();
+    if (resp.status != Status.success) throw ServerException(resp.data['message']);
 
     return UserModel.fromJson(resp.data);
   }
@@ -39,12 +40,17 @@ class AuthAPIImpl extends API implements AuthAPI {
     required String email,
     required String password,
   }) async {
-    final resp = await post('/user/register', body: {
+    final resp = await post('/api/auth/register', body: {
       'email': email,
       'password': password,
+      'phone': '+37088888888',
+      "first_name": "Kristupas",
+      "last_name": "Kuras",
+      "date_of_birth": "2001-08-06T00:00:00.000Z",
+      "role_id": 3,
     });
 
-    if (resp.data == null) return throw Exception();
+    if (resp.data != Status.success) throw ServerException(resp.data['message']);
 
     return UserModel.fromJson(resp.data);
   }

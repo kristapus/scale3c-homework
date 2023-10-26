@@ -5,7 +5,13 @@ part 'user_model.g.dart';
 
 @JsonSerializable()
 class UserModel extends User {
-  const UserModel({required super.email, required super.password});
+  const UserModel({
+    required super.id,
+    required super.email,
+    required super.password,
+    required super.firstName,
+    required super.lastName,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 

@@ -19,4 +19,8 @@ class Authenticated extends AuthState {
   List<Object> get props => [user];
 }
 
-class AuthFailed extends AuthState {}
+class AuthFailed extends AuthState {
+  final String? message;
+
+  AuthFailed(this.message) : super();
+}

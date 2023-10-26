@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scale3c_homework/features/auth/presentation/widgets/login_board.dart';
 import 'package:scale3c_homework/resources/images.dart';
 import 'package:scale3c_homework/resources/text_styles.dart';
-import 'package:scale3c_homework/shared/presentation/widgets/base_page.dart';
+import 'package:scale3c_homework/shared/widgets/base_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

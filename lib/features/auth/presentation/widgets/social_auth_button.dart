@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scale3c_homework/core/extensions/build_context_extension.dart';
 import 'package:scale3c_homework/resources/colors.dart';
-import 'package:scale3c_homework/shared/presentation/widgets/buttons/button.dart';
+import 'package:scale3c_homework/shared/widgets/buttons/button.dart';
 
 class SocialAuthButton extends StatelessWidget {
   final void Function() onPressed;
@@ -17,8 +18,8 @@ class SocialAuthButton extends StatelessWidget {
     return Button(
       onPressed: onPressed,
       backgroundColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(
-        side: BorderSide(width: 1, color: AppColors.thinGrey),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(width: 1, color: context.colors.secondaryThin),
       ),
       child: icon,
     );

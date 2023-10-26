@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const thinGrey = Color(0xFFE2E2E0);
-  static const lightGrey = Color(0xFFF7F7F7);
-  static const mediumGrey = Color(0xFFB0B0C3);
-  static const darkGrey = Color(0xFF838391);
-  static const heavyGrey = Color(0xFF525464);
+  static const _thinGrey = Color(0xFFE2E2E0);
+  static const _lightGrey = Color(0xFFF7F7F7);
+  static const _mediumGrey = Color(0xFFB0B0C3);
+  static const _darkGrey = Color(0xFF838391);
+  static const _heavyGrey = Color(0xFF525464);
 
-  static const peach = Color(0xFFFFB19D);
-  static const white = Color(0xFFFFFFFF);
-  static const green = Color(0xFF20C3AF);
+  static const _peach = Color(0xFFFFB19D);
+  static const _white = Color(0xFFFFFFFF);
+  static const _green = Color(0xFF20C3AF);
+}
+
+// In order to have different schemes and custom var names
+extension ColorSchemeExtension on ColorScheme {
+  Color get secondaryThin => AppColors._thinGrey;
+  Color get secondaryLight => AppColors._lightGrey;
+  Color get secondaryMedium => AppColors._mediumGrey;
+  Color get secondaryDark => AppColors._darkGrey;
+  Color get secondaryHeavy => AppColors._heavyGrey;
+
+  Color get secondaryAccent => AppColors._peach;
+  Color get primaryAccent => AppColors._white;
+  Color get primary => AppColors._green;
 }

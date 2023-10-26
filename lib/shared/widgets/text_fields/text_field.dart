@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scale3c_homework/core/extensions/build_context_extension.dart';
 import 'package:scale3c_homework/resources/colors.dart';
 import 'package:scale3c_homework/resources/text_styles.dart';
 
@@ -22,18 +23,18 @@ class AppTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: Theme.of(context).textTheme.textField.copyWith(color: AppColors.darkGrey),
+      style: Theme.of(context).textTheme.textField.copyWith(color: context.colors.secondaryDark),
       decoration: InputDecoration(
-        fillColor: AppColors.lightGrey,
+        fillColor: context.colors.secondaryLight,
         filled: true,
         hintText: hintText,
-        hintStyle: const TextStyle(color: AppColors.mediumGrey),
+        hintStyle: TextStyle(color: context.colors.secondaryMedium),
         contentPadding: const EdgeInsets.all(20),
         border: InputBorder.none,
         focusedBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
       ),
-      cursorColor: AppColors.mediumGrey,
+      cursorColor: context.colors.secondaryMedium,
       obscureText: obscureText,
       keyboardType: keyboardType,
       validator: validator,
