@@ -63,6 +63,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   Widget build(BuildContext context) {
     return BasePage(
       title: const SizedBox(),
+      // TODO: refeactor this button to AppBarButton in the future
       trailing: Button(
         minWidth: 0,
         padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
