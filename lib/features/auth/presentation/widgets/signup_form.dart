@@ -132,7 +132,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
             ),
           const SizedBox(height: 16),
           Consumer(
-            builder: (context, watch, child) {
+            builder: (context, ref, _) {
               final authState = ref.watch(authProvider);
 
               if (authState is Loading || authState is Authenticated) {

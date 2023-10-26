@@ -21,7 +21,6 @@ class LoginForm extends ConsumerStatefulWidget {
 
 class _LoginFormState extends ConsumerState<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState<String>> _passwordKey = GlobalKey<FormFieldState<String>>();
 
   final TextEditingController emailController = TextEditingController.fromValue(TextEditingValue.empty);
   final TextEditingController passwordController = TextEditingController.fromValue(TextEditingValue.empty);
@@ -94,52 +93,47 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final authState = ref.watch(authProvider);
+    final authState = ref.watch(authProvider);
 
-      return Form(
-        key: _formKey,
-        autovalidateMode: AutovalidateMode.disabled,
-        child: Column(
-          children: [
-            EmailTextField(controller: emailController),
-            const SizedBox(height: 16),
-            PasswordTextField(
-              key: _passwordKey,
-              controller: passwordController,
-            ),
-            if (_errorMessage != null)
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  _errorMessage!,
-                  textAlign: TextAlign.right,
-                  style: Theme.of(context).textTheme.mBold.copyWith(color: Colors.red),
-                ),
-              ),
-            const SizedBox(height: 14),
+    return Form(
+      key: _formKey,
+      autovalidateMode: AutovalidateMode.disabled,
+      child: Column(
+        children: [
+          EmailTextField(controller: emailController),
+          const SizedBox(height: 16),
+          PasswordTextField(controller: passwordController),
+          if (_errorMessage != null)
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                'Forgot your password?',
-                style: Theme.of(context).textTheme.mBold.copyWith(color: context.colors.secondaryDark),
+                _errorMessage!,
+                textAlign: TextAlign.right,
+                style: Theme.of(context).textTheme.mBold.copyWith(color: Colors.red),
               ),
             ),
-            const SizedBox(height: 50),
-            (authState is Loading || authState is Authenticated)
-                ? AppTextButton(
-                    onPressed: () {},
-                    backgroundColor: context.colors.secondaryThin,
-                    text: 'Loading...',
-                  )
-                : AppTextButton(
-                    onPressed: _isValid ? login : _showErrors,
-                    backgroundColor: _isValid ? context.colors.primaryColor : context.colors.secondaryThin,
-                    text: 'Login',
-                  )
-          ],
-        ),
-      );
-    });
+          const SizedBox(height: 14),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              'Forgot your password?',
+              style: Theme.of(context).textTheme.mBold.copyWith(color: context.colors.secondaryDark),
+            ),
+          ),
+          const SizedBox(height: 50),
+          (authState is Loading || authState is Authenticated)
+              ? AppTextButton(
+                  onPressed: () {},
+                  backgroundColor: context.colors.secondaryThin,
+                  text: 'Loading...',
+                )
+              : AppTextButton(
+                  onPressed: _isValid ? login : _showErrors,
+                  backgroundColor: _isValid ? context.colors.primaryColor : context.colors.secondaryThin,
+                  text: 'Login',
+                )
+        ],
+      ),
+    );
   }
 }
