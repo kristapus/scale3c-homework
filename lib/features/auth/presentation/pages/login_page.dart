@@ -16,6 +16,7 @@ class LoginPage extends StatelessWidget {
       appBarColor: context.colors.primaryAccent,
       body: Center(
         child: SingleChildScrollView(
+          // TODO: LoginPage and Signup page can be refactored even more, but thats debatable if its worth it
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             children: [
