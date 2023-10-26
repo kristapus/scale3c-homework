@@ -9,35 +9,42 @@ class ProfileAdditionInformationSection extends StatelessWidget {
   final String email;
   final int completedProject;
 
+  final EdgeInsets? padding;
+
   const ProfileAdditionInformationSection({
     required this.phone,
     required this.email,
     required this.completedProject,
+    this.padding,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        DetailsTile(
-          icon: AppImages.phoneIcon.image(color: context.colors.secondaryAccent), // TODO: there is room for imprevement, as icons aspect ratio are not the same, therefore size as well...
-          title: 'Phone',
-          subtitle: phone,
-        ),
-        const SizedBox(height: 16),
-        DetailsTile(
-          icon: AppImages.emailIcon.image(color: context.colors.secondaryAccent),
-          title: 'Email',
-          subtitle: email,
-        ),
-        const SizedBox(height: 16),
-        DetailsTile(
-          icon: AppImages.completedIcon.image(color: context.colors.secondaryAccent),
-          title: 'Completed project',
-          subtitle: completedProject.toString(),
-        ),
-      ],
+    return Container(
+      padding: padding,
+      color: context.colors.secondaryHeavy,
+      child: Column(
+        children: [
+          DetailsTile(
+            icon: AppImages.phoneIcon.image(color: context.colors.secondaryAccent), // TODO: there is room for imprevement, as icons aspect ratio are not the same, therefore size as well...
+            title: 'Phone',
+            subtitle: phone,
+          ),
+          const SizedBox(height: 16),
+          DetailsTile(
+            icon: AppImages.emailIcon.image(color: context.colors.secondaryAccent),
+            title: 'Email',
+            subtitle: email,
+          ),
+          const SizedBox(height: 16),
+          DetailsTile(
+            icon: AppImages.completedIcon.image(color: context.colors.secondaryAccent),
+            title: 'Completed project',
+            subtitle: completedProject.toString(),
+          ),
+        ],
+      ),
     );
   }
 }
