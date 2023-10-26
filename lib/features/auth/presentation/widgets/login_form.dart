@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scale3c_homework/core/extensions/build_context_extension.dart';
 import 'package:scale3c_homework/features/auth/presentation/providers/auth_state.dart';
+import 'package:scale3c_homework/features/auth/presentation/widgets/form_error_message.dart';
 import 'package:scale3c_homework/resources/colors.dart';
 import 'package:scale3c_homework/resources/text_styles.dart';
 import 'package:scale3c_homework/shared/providers/auth_providers.dart';
@@ -103,15 +104,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           EmailTextField(controller: emailController),
           const SizedBox(height: 16),
           PasswordTextField(controller: passwordController),
-          if (_errorMessage != null)
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                _errorMessage!,
-                textAlign: TextAlign.right,
-                style: Theme.of(context).textTheme.mBold.copyWith(color: Colors.red),
-              ),
-            ),
+          if (_errorMessage != null) FormErrorMessage(message: _errorMessage!),
           const SizedBox(height: 14),
           Align(
             alignment: Alignment.centerRight,
