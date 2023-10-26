@@ -37,8 +37,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (user) => Authenticated(user: user),
     );
 
-    print(state.runtimeType.toString());
-
     return state;
   }
 

@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
 class User {
   final String id;
   final String email;
@@ -10,11 +9,9 @@ class User {
 
   @JsonKey(name: 'last_name')
   final String lastName;
-
-  @JsonKey(defaultValue: null)
   final String? phone;
 
-  @JsonKey(name: 'completed_projects', defaultValue: null)
+  @JsonKey(name: 'completed_projects')
   final int? completedProjects;
 
   const User({

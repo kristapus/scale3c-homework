@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:scale3c_homework/core/extensions/build_context_extension.dart';
+import 'package:scale3c_homework/resources/colors.dart';
 import 'package:scale3c_homework/shared/router/router.dart';
 
 void main() {
@@ -13,10 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
-      title: 'Flutter Demo',
+      title: 'Scale3c homework',
       theme: ThemeData(
-        // fontFamily: 'Roboto',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Roboto',
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: context.colors.primaryColor,
+        ),
         useMaterial3: true,
       ),
     );

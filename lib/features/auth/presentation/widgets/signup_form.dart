@@ -35,7 +35,6 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     super.initState();
 
     _authStateListener = ref.read(authProvider.notifier).addListener((state) {
-      print('state changed');
       if (state is Authenticated) context.go('/profile');
     });
 

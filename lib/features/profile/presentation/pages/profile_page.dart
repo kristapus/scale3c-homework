@@ -23,7 +23,7 @@ class ProfilePage extends ConsumerStatefulWidget {
 class _ProfilePageState extends ConsumerState<ProfilePage> {
   late final Function _authStateListener;
 
-  // This properety is used to store user details after state is no longer
+  // TODO: This properety is used to store user details after state is no longer
   // Authenticated, for UI/UX purposes, so the screen remain the same.
   late UserModel _user;
 
@@ -51,9 +51,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
     if (state is! Authenticated) {
       context.go('/login');
     } else {
-      setState(() {
-        _user = state.user;
-      });
+      setState(() => _user = state.user);
     }
   }
 
@@ -66,11 +64,13 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
-            const SizedBox(height: 40),
-            ProfileMainInformationSection(
-              username: _user.email,
-              address: 'Address',
-              id: _user.id,
+            Padding(
+              padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
+              child: ProfileMainInformationSection(
+                username: '${_user.firstName} ${_user.lastName}',
+                address: 'Address',
+                id: _user.id,
+              ),
             ),
             const SizedBox(height: 17),
             RichText(
@@ -100,9 +100,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       text: 'About Me',
                     ),
                   ),
-                  const SizedBox(
-                    width: 15,
-                  ),
+                  const SizedBox(width: 15),
                   Expanded(
                     child: AppTextButton(
                       onPressed: () => ref.read(authProvider.notifier).logout(),

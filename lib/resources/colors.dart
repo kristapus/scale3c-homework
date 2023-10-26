@@ -12,7 +12,7 @@ class AppColors {
   static const _green = Color(0xFF20C3AF);
 }
 
-// In order to have different schemes and custom var names
+// TODO: In order to have different schemes and custom var names in the future
 extension ColorSchemeExtension on ColorScheme {
   Color get secondaryThin => AppColors._thinGrey;
   Color get secondaryLight => AppColors._lightGrey;

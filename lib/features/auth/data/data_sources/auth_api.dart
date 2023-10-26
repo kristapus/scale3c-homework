@@ -51,8 +51,6 @@ class AuthAPIImpl extends API implements AuthAPI {
       'role_id': 3,
     });
 
-    print(resp.data);
-
     if (resp.status != Status.success) throw ServerException(resp.data['message']);
 
     return UserModel.fromJson(resp.data);

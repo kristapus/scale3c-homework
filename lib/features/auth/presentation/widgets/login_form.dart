@@ -51,7 +51,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
     super.dispose();
   }
 
-  // Validates Form without showing errors to user, because of UX
+  // Validates Form without showing errors to user, because of UX.
+  // Comment bellow has a solution.
   void _validateFormWithoutRebuilding() {
     bool isEmailValid = EmailTextField.validator(emailController.text) == null;
     bool isPasswordValid = PasswordTextField.emptyValidator(passwordController.text) == null;
