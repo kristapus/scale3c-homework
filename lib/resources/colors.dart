@@ -22,5 +22,6 @@ extension ColorSchemeExtension on ColorScheme {
 
   Color get secondaryAccent => AppColors._peach;
   Color get primaryAccent => AppColors._white;
-  Color get primary => AppColors._green;
+
+  Color get primaryColor => AppColors._green;
 }

@@ -30,6 +30,7 @@ class AuthRepository implements IAuthRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
+      print(e.toString());
       return const Left(ServerFailure(''));
     }
   }

@@ -25,13 +25,17 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   final TextEditingController passwordController = TextEditingController.fromValue(TextEditingValue.empty);
   final TextEditingController confirmPasswordController = TextEditingController.fromValue(TextEditingValue.empty);
 
+  late final Function _authStateListener;
+
   bool _isValid = false;
+  String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
 
-    ref.read(authProvider.notifier).addListener((state) {
+    _authStateListener = ref.read(authProvider.notifier).addListener((state) {
+      print('state changed');
       if (state is Authenticated) context.go('/profile');
     });
 
@@ -45,6 +49,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    _authStateListener();
     super.dispose();
   }
 
@@ -72,77 +77,82 @@ class _SignupFormState extends ConsumerState<SignupForm> {
       throw Exception('key does not have state');
     } else {
       _formKey.currentState?.validate();
-      ref.read(authProvider.notifier).dismissAuthFailedMessage();
+      _setErrorMessage(null);
     }
   }
 
-  void _register() {
+  void _setErrorMessage(String? message) {
+    setState(() => _errorMessage = message);
+  }
+
+  void _register() async {
     _showErrors(); // Dissmisses any shown errors while loading
 
-    ref.read(authProvider.notifier).register(
+    final state = await ref.read(authProvider.notifier).register(
           email: emailController.text,
           password: passwordController.text,
         );
+
+    // TODO: this is a temporary way to display error's from the server
+    if (state is AuthFailed) {
+      _setErrorMessage(state.message);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final authState = ref.watch(authProvider);
-
-      return Form(
-        key: _formKey,
-        autovalidateMode: AutovalidateMode.disabled,
-        child: Column(
-          children: [
-            EmailTextField(
-              controller: emailController,
-              hint: 'Enter email',
-            ),
-            const SizedBox(height: 16),
-            PasswordTextField(
-              controller: passwordController,
-              hint: 'Enter password',
-            ),
-            const SizedBox(height: 16),
-            PasswordTextField(
-              controller: confirmPasswordController,
-              hint: 'Confirm password',
-              validator: confirmPasswordValidator,
-            ),
-            const SizedBox(height: 16),
-            if (authState is AuthFailed && authState.message != null)
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  authState.message!,
-                  textAlign: TextAlign.right,
-                  style: Theme.of(context).textTheme.mBold.copyWith(color: Colors.red),
-                ),
+    return Form(
+      key: _formKey,
+      autovalidateMode: AutovalidateMode.disabled,
+      child: Column(
+        children: [
+          EmailTextField(
+            controller: emailController,
+            hint: 'Enter email',
+          ),
+          const SizedBox(height: 16),
+          PasswordTextField(
+            controller: passwordController,
+            hint: 'Enter password',
+          ),
+          const SizedBox(height: 16),
+          PasswordTextField(
+            controller: confirmPasswordController,
+            hint: 'Confirm password',
+            validator: confirmPasswordValidator,
+          ),
+          const SizedBox(height: 16),
+          if (_errorMessage != null)
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                _errorMessage!,
+                textAlign: TextAlign.right,
+                style: Theme.of(context).textTheme.mBold.copyWith(color: Colors.red),
               ),
-            const SizedBox(height: 16),
-            Consumer(
-              builder: (context, watch, child) {
-                final authState = ref.watch(authProvider);
-
-                if (authState is Loading || authState is Authenticated) {
-                  return AppTextButton(
-                    onPressed: () {},
-                    backgroundColor: context.colors.secondaryThin,
-                    text: 'Loading...',
-                  );
-                }
-
-                return AppTextButton(
-                  onPressed: _isValid ? _register : _showErrors,
-                  backgroundColor: _isValid ? context.colors.primary : context.colors.secondaryThin,
-                  text: 'Sign Up',
-                );
-              },
             ),
-          ],
-        ),
-      );
-    });
+          const SizedBox(height: 16),
+          Consumer(
+            builder: (context, watch, child) {
+              final authState = ref.watch(authProvider);
+
+              if (authState is Loading || authState is Authenticated) {
+                return AppTextButton(
+                  onPressed: () {},
+                  backgroundColor: context.colors.secondaryThin,
+                  text: 'Loading...',
+                );
+              }
+
+              return AppTextButton(
+                onPressed: _isValid ? _register : _showErrors,
+                backgroundColor: _isValid ? context.colors.primaryColor : context.colors.secondaryThin,
+                text: 'Sign Up',
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

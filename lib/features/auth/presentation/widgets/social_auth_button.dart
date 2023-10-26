@@ -6,10 +6,12 @@ import 'package:scale3c_homework/shared/widgets/buttons/button.dart';
 class SocialAuthButton extends StatelessWidget {
   final void Function() onPressed;
   final Widget icon;
+  final Color? backgroundColor;
 
   const SocialAuthButton({
     required this.onPressed,
     required this.icon,
+    this.backgroundColor,
     super.key,
   });
 
@@ -17,9 +19,12 @@ class SocialAuthButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Button(
       onPressed: onPressed,
-      backgroundColor: Colors.transparent,
+      backgroundColor: backgroundColor ?? Colors.transparent,
       shape: RoundedRectangleBorder(
-        side: BorderSide(width: 1, color: context.colors.secondaryThin),
+        side: BorderSide(
+          width: 1,
+          color: context.colors.secondaryThin,
+        ),
       ),
       child: icon,
     );

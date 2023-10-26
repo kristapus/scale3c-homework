@@ -40,17 +40,20 @@ class AuthAPIImpl extends API implements AuthAPI {
     required String email,
     required String password,
   }) async {
+    // TODO: this part is hardcoded purely because of testing purposes
     final resp = await post('/api/auth/register', body: {
       'email': email,
       'password': password,
       'phone': '+37088888888',
-      "first_name": "Kristupas",
-      "last_name": "Kuras",
-      "date_of_birth": "2001-08-06T00:00:00.000Z",
-      "role_id": 3,
+      'first_name': 'Kristupas',
+      'last_name': 'Kuras',
+      'date_of_birth': '2000-01-01T00:00:00.000Z',
+      'role_id': 3,
     });
 
-    if (resp.data != Status.success) throw ServerException(resp.data['message']);
+    print(resp.data);
+
+    if (resp.status != Status.success) throw ServerException(resp.data['message']);
 
     return UserModel.fromJson(resp.data);
   }

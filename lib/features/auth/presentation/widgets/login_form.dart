@@ -27,14 +27,15 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   final TextEditingController passwordController = TextEditingController.fromValue(TextEditingValue.empty);
 
   bool _isValid = false;
+  String? _errorMessage;
 
-  late final Function authStateListener;
+  late final Function _authStateListener;
 
   @override
   void initState() {
     super.initState();
 
-    authStateListener = ref.read(authProvider.notifier).addListener((state) {
+    _authStateListener = ref.read(authProvider.notifier).addListener((state) {
       if (state is Authenticated) context.go('/profile');
     });
 
@@ -46,7 +47,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-    authStateListener();
+    _authStateListener();
     super.dispose();
   }
 
@@ -68,17 +69,26 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       throw Exception('key does not have state');
     } else {
       _formKey.currentState?.validate();
-      ref.read(authProvider.notifier).dismissAuthFailedMessage();
+      _setErrorMessage(null);
     }
+  }
+
+  void _setErrorMessage(String? message) {
+    setState(() => _errorMessage = message);
   }
 
   void login() async {
     _showErrors(); // Dissmisses any shown errors while loading
 
-    ref.read(authProvider.notifier).login(
+    final state = await ref.read(authProvider.notifier).login(
           email: emailController.text,
           password: passwordController.text,
         );
+
+    // TODO: this is a temporary way to display error's from the server
+    if (state is AuthFailed) {
+      _setErrorMessage(state.message);
+    }
   }
 
   @override
@@ -97,11 +107,11 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               key: _passwordKey,
               controller: passwordController,
             ),
-            if (authState is AuthFailed && authState.message != null)
+            if (_errorMessage != null)
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  authState.message!,
+                  _errorMessage!,
                   textAlign: TextAlign.right,
                   style: Theme.of(context).textTheme.mBold.copyWith(color: Colors.red),
                 ),
@@ -123,7 +133,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                   )
                 : AppTextButton(
                     onPressed: _isValid ? login : _showErrors,
-                    backgroundColor: _isValid ? context.colors.primary : context.colors.secondaryThin,
+                    backgroundColor: _isValid ? context.colors.primaryColor : context.colors.secondaryThin,
                     text: 'Login',
                   )
           ],

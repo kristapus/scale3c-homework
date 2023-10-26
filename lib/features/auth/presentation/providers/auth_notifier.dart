@@ -14,7 +14,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   AuthNotifier({required this.ref, required this.authRepository}) : super(Initial());
 
-  Future<void> login({required String email, required String password}) async {
+  Future<AuthState> login({required String email, required String password}) async {
     state = Loading();
 
     final result = await authRepository.loginWithEmail(email: email, password: password);
@@ -23,9 +23,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (failure) => AuthFailed(failure.message),
       (user) => Authenticated(user: user),
     );
+
+    return state;
   }
 
-  Future<void> register({required String email, required String password}) async {
+  Future<AuthState> register({required String email, required String password}) async {
     state = Loading();
 
     final result = await authRepository.register(email: email, password: password);
@@ -34,17 +36,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (failure) => AuthFailed(failure.message),
       (user) => Authenticated(user: user),
     );
-  }
 
-  void dismissAuthFailedMessage() {
-    if (state is AuthFailed) {
-      state = AuthFailed(null);
-    }
+    print(state.runtimeType.toString());
+
+    return state;
   }
 
   void logout() {
     state = Initial();
-
-    // TODO: should call server to delete tokens
   }
 }

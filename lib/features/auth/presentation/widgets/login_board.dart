@@ -33,10 +33,7 @@ class LoginBoard extends StatelessWidget {
               TextSpan(
                 text: 'Sign Up',
                 style: Theme.of(context).textTheme.mXBoldClick.copyWith(color: context.colors.secondaryAccent),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    context.go('/signup');
-                  },
+                recognizer: TapGestureRecognizer()..onTap = () => context.go('/signup'),
               ),
             ],
           ),

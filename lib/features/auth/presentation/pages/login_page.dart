@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scale3c_homework/core/extensions/build_context_extension.dart';
 import 'package:scale3c_homework/features/auth/presentation/widgets/login_board.dart';
+import 'package:scale3c_homework/resources/colors.dart';
 import 'package:scale3c_homework/resources/images.dart';
 import 'package:scale3c_homework/resources/text_styles.dart';
 import 'package:scale3c_homework/shared/widgets/base_page.dart';
@@ -11,7 +13,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasePage(
       title: Text('Sign In', style: Theme.of(context).textTheme.lBold),
-      appBarColor: Theme.of(context).colorScheme.background,
+      appBarColor: context.colors.primaryAccent,
       body: Center(
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

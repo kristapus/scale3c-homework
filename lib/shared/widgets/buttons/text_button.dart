@@ -8,7 +8,6 @@ class AppTextButton extends StatelessWidget {
   final void Function() onPressed;
   final String text;
   final TextStyle? textStyle;
-
   final Color? backgroundColor;
   final OutlinedBorder? shape;
 
@@ -25,11 +24,11 @@ class AppTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Button(
       onPressed: onPressed,
-      backgroundColor: backgroundColor ?? context.colors.primary,
+      backgroundColor: backgroundColor ?? context.colors.primaryColor,
       shape: shape,
       child: Text(
         text,
-        style: textStyle ?? Theme.of(context).textTheme.mBold.copyWith(color: context.colors.primaryAccent),
+        style: textStyle ?? Theme.of(context).textTheme.mMedium.copyWith(color: context.colors.primaryAccent),
       ),
     );
   }

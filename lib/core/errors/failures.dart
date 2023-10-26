@@ -4,7 +4,6 @@ abstract class Failure {
   const Failure(this.message);
 }
 
-// General failures
 class ServerFailure extends Failure {
   const ServerFailure(super.message);
 }

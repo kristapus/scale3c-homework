@@ -23,7 +23,7 @@ class AppTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: Theme.of(context).textTheme.textField.copyWith(color: context.colors.secondaryDark),
+      style: Theme.of(context).textTheme.mMedium.copyWith(color: context.colors.secondaryDark),
       decoration: InputDecoration(
         fillColor: context.colors.secondaryLight,
         filled: true,
